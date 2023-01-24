@@ -9,23 +9,20 @@ document.addEventListener("DOMContentLoaded", () => {
   let guessedWordCount = 0;
 
   const keys = document.querySelectorAll(".keyboard-row button");
-
+  ///https://random-word.ryanrk.com/api/en/word/random/
   function getNewWord() {
     fetch(
-      `https://wordsapiv1.p.rapidapi.com/words/?random=true&lettersMin=5&lettersMax=5`,
+      `https://random-word.ryanrk.com/api/en/word/random/`,
       {
         method: "GET",
-        headers: {
-          "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-          "x-rapidapi-key": "<YOUR_KEY_GOES_HERE>",
-        },
       }
     )
       .then((response) => {
         return response.json();
       })
       .then((res) => {
-        word = res.word;
+        console.log(res[0].toLowerCase());
+        word = res[0].toLowerCase();
       })
       .catch((err) => {
         console.error(err);
@@ -51,13 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getTileColor(letter, index) {
-    const isCorrectLetter = word.includes(letter);
+    const arr = word ? word : [];
+    console.log(arr, letter, index);
+   const isCorrectLetter = arr.includes(letter);
 
     if (!isCorrectLetter) {
       return "rgb(58, 58, 60)";
     }
 
-    const letterInThatPosition = word.charAt(index);
+    const letterInThatPosition = arr.charAt(index);
     const isCorrectPosition = letter === letterInThatPosition;
 
     if (isCorrectPosition) {
@@ -74,18 +73,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const currentWord = currentWordArr.join("");
-
-    fetch(`https://wordsapiv1.p.rapidapi.com/words/${currentWord}`, {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-        "x-rapidapi-key": "61c5e3986dmsh20c1bee95c2230dp18d1efjsn4668bbcfc1b3",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error();
-        }
+    
+    // fetch(`https://wordsapiv1.p.rapidapi.com/words/${currentWord}`, {
+    //   method: "GET",
+    //   headers: {
+    //     "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+    //     "x-rapidapi-key": "61c5e3986dmsh20c1bee95c2230dp18d1efjsn4668bbcfc1b3",
+    //   },
+    // })
+    //  .then((res) => {
+    //   console.log(res);
+    //    if (!res.ok) {
+    //      throw Error();
+    //    }
 
         const firstLetterId = guessedWordCount * 5 + 1;
         const interval = 200;
@@ -111,10 +111,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         guessedWords.push([]);
-      })
-      .catch(() => {
-        window.alert("Word is not recognised!");
-      });
+      // })
+      // .catch(() => {
+      //   window.alert("Word is not recognised!");
+      // });
   }
 
   function createSquares() {
