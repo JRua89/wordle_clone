@@ -49,8 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getTileColor(letter, index) {
     const arr = word ? word : [];
-    console.log(arr, letter, index);
-   const isCorrectLetter = arr.includes(letter);
+    const isCorrectLetter = arr.includes(letter);
 
     if (!isCorrectLetter) {
       return "rgb(58, 58, 60)";
@@ -70,6 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentWordArr = getCurrentWordArr();
     if (currentWordArr.length !== 5) {
       window.alert("Word must be 5 letters");
+      $('#MyModal').show();
+      $('#mymodal').modal('show');
       exit;
     }
 
