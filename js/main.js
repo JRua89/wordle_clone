@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let guessedWordCount = 0;
 
   const keys = document.querySelectorAll(".keyboard-row button");
-  ///https://random-word.ryanrk.com/api/en/word/random/
+ 
   function getNewWord() {
     fetch(
-      `https://random-word.ryanrk.com/api/en/word/random/`,
+      `https://random-word.ryanrk.com/api/en/word/random/?length=5`,
       {
         method: "GET",
       }
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json();
       })
       .then((res) => {
-        console.log(res[0].toLowerCase());
+        console.error(res[0]);
         word = res[0].toLowerCase();
       })
       .catch((err) => {
@@ -70,23 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentWordArr = getCurrentWordArr();
     if (currentWordArr.length !== 5) {
       window.alert("Word must be 5 letters");
+      exit;
     }
 
     const currentWord = currentWordArr.join("");
     
-    // fetch(`https://wordsapiv1.p.rapidapi.com/words/${currentWord}`, {
-    //   method: "GET",
-    //   headers: {
-    //     "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-    //     "x-rapidapi-key": "61c5e3986dmsh20c1bee95c2230dp18d1efjsn4668bbcfc1b3",
-    //   },
-    // })
-    //  .then((res) => {
-    //   console.log(res);
-    //    if (!res.ok) {
-    //      throw Error();
-    //    }
-
         const firstLetterId = guessedWordCount * 5 + 1;
         const interval = 200;
         currentWordArr.forEach((letter, index) => {
@@ -104,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (currentWord === word) {
           window.alert("Congratulations!");
+          
         }
 
         if (guessedWords.length === 6) {
@@ -111,10 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         guessedWords.push([]);
-      // })
-      // .catch(() => {
-      //   window.alert("Word is not recognised!");
-      // });
+      
   }
 
   function createSquares() {
