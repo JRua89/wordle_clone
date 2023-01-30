@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((res) => {
         console.error(res[0]);
+        if (!res[0].match(/^\p{L}+(?:[- ']\p{L}+)*$/u)) {
+          location.reload();
+      }
         word = res[0].toLowerCase();
       })
       .catch((err) => {
@@ -69,8 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentWordArr = getCurrentWordArr();
     if (currentWordArr.length !== 5) {
       window.alert("Word must be 5 letters");
-      $('#MyModal').show();
-      $('#mymodal').modal('show');
       exit;
     }
 

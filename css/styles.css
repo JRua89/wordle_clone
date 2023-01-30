@@ -105,3 +105,32 @@ header {
 .spacer-half {
   flex-grow: 0.5;
 }
+
+
+.key-tile {
+  width: 36px;
+  height: 40px;
+  margin: 1px;
+  border: 1px solid lightgray;
+
+  /* Text */
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.enter-key-tile {
+  width: 76px;
+  height: 40px;
+  margin: 1px;
+  border: 1px solid lightgray;
+
+  /* Text */
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
